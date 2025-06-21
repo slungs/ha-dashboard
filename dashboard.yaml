@@ -1,0 +1,276 @@
+kiosk_mode:
+  hide_header: true
+  hide_sidebar: true
+views:
+  - title: Home
+    sections:
+      - type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: light.a_kontor_group
+                aspect_ratio: 1/1
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+                styles:
+                  card:
+                    - background-color: transparent
+                    - color: var(--primary)
+                    - border-style: solid
+                    - border-width: 6px
+                    - border-color: var(--primary)
+                    - border-radius: 100%
+                    - font-size: 0.8em
+                  grid:
+                    - grid-template-areas: '"." "i" "i" "n" "."'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+                state:
+                  - value: 'off'
+                    styles:
+                      card:
+                        - border-color: var(--secondary)
+                        - border-style: solid
+                        - border-width: 6px
+              - type: custom:button-card
+                entity: light.a_kontor_group
+                aspect_ratio: 1/1
+                styles:
+                  card:
+                    - background-color: transparent
+                    - color: var(--primary)
+                    - border-radius: 100%
+                    - border-color: var(--primary)
+                    - border-width: 6px
+                    - font-size: 0.7em
+                  grid:
+                    - grid-template-areas: '"." "i" "i" "n" "."'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+              - type: custom:button-card
+                entity: light.a_kontor_group
+                aspect_ratio: 1/1
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+                styles:
+                  card:
+                    - background-color: transparent
+                    - color: var(--primary)
+                    - border-style: solid
+                    - border-width: 6px
+                    - border-color: var(--primary)
+                    - border-radius: 100%
+                    - font-size: 0.8em
+                  grid:
+                    - grid-template-areas: '"." "i" "i" "n" "."'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+                state:
+                  - value: 'off'
+                    styles:
+                      card:
+                        - border-color: var(--secondary)
+                        - border-style: solid
+                        - border-width: 6px
+      - type: grid
+        cards: []
+      - type: grid
+        cards:
+          - type: custom:stack-in-card
+            cards:
+              - type: custom:layout-card
+                layout_type: custom:grid-layout
+                layout:
+                  grid-template-columns: 70% 15% 15%
+                  margin: 0px 0px 0px 0px
+                cards:
+                  - type: custom:mushroom-template-card
+                    name: Taurus
+                    entity: binary_sensor.node_taurus_status
+                    layout: horizontal
+                    fill_container: true
+                    primary: Taurus
+                    icon: mdi:server
+                    icon_color: '#d5634d'
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none;
+                          color: var(--secondary);
+                          font-family: "Montserrat";
+                        }
+                  - type: custom:mushroom-template-card
+                    icon: mdi:power
+                    entity: button.node_taurus_shutdown
+                    tap_action: none
+                    hold_action: press
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none;
+                          }
+                  - type: custom:mushroom-template-card
+                    icon: mdi:restart
+                    entity: button.node_taurus_reboot
+                    tap_action: none
+                    hold_action: press
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none;
+                          }
+            card_mod:
+              style: |
+                ha-card {
+                  border: none;
+                  }
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.node_taurus_cpu_used
+                    name: CPU
+                line_color: var(--primary)
+                show:
+                  name: true
+                  state: true
+                  icon: false
+                  background-color: '#ffffff'
+                font_size: 75
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-family: Montserrat;
+                      border: none;
+                      border-radius: 0px;
+                    }
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.node_taurus_memory_used_percentage
+                    name: RAM
+                line_color: var(--primary)
+                show:
+                  name: true
+                  state: true
+                  icon: false
+                font_size: 75
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-family: Montserrat;
+                      border: none;
+                      border-radius: 0px;
+                    }
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.node_taurus_disk_used_percentage
+                    name: HDD
+                line_color: var(--primary)
+                show:
+                  name: true
+                  state: true
+                  icon: false
+                font_size: 75
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-family: Montserrat;
+                      border: none;
+                      border-radius: 0px;
+                    }
+          - type: heading
+            heading_style: title
+      - type: grid
+        cards:
+          - type: custom:frigate-card
+            cameras:
+              - camera_entity: camera.entrance_frigate_2
+                live_provider: auto
+            view:
+              default: live
+              dim: false
+            menu:
+              style: none
+              buttons:
+                frigate:
+                  enabled: false
+                cameras:
+                  enabled: false
+                substreams:
+                  enabled: false
+                live:
+                  enabled: false
+                clips:
+                  enabled: false
+                snapshots:
+                  enabled: false
+                camera_ui:
+                  enabled: false
+                download:
+                  enabled: false
+                fullscreen:
+                  enabled: false
+                timeline:
+                  enabled: false
+                display_mode:
+                  enabled: false
+            status_bar:
+              style: none
+            timeline:
+              show_recordings: true
+            performance:
+              style:
+                border_radius: true
+          - type: custom:frigate-card
+            cameras:
+              - camera_entity: camera.garden_frigate_2
+                live_provider: auto
+            view:
+              default: live
+              dim: false
+            menu:
+              style: none
+              buttons:
+                frigate:
+                  enabled: false
+                cameras:
+                  enabled: false
+                substreams:
+                  enabled: false
+                live:
+                  enabled: false
+                clips:
+                  enabled: false
+                snapshots:
+                  enabled: false
+                camera_ui:
+                  enabled: false
+                download:
+                  enabled: false
+                fullscreen:
+                  enabled: false
+                timeline:
+                  enabled: false
+                display_mode:
+                  enabled: false
+            status_bar:
+              style: none
+            timeline:
+              show_recordings: true
+            performance:
+              style:
+                border_radius: true
+    visible:
+      - user: 9b99bdf9b311480b9abb31f8dae723f7
+      - user: a24d464af2b848af9c17151045b2ce1a
+      - user: 08888f3d13aa440bbc3e894beda9746e
+      - user: ff6ee6f603c14bfa9168bc4c56e741ab
+    cards: []
+    type: sections
+    max_columns: 4
+    theme: Antons-theme-1
